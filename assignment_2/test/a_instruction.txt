@@ -1,0 +1,5 @@
+s = Sudoku('sudoku_3.txt')
+s.bare_tex_output()
+s.forced_tex_output()
+s.marked_tex_output()
+s.worked_tex_output()

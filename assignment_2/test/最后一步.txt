@@ -1,0 +1,47 @@
+while(1):
+            loop_flag = 0
+
+            for i in range(9): ## row check
+                row_dot = set()
+                possible_l = list()
+                row_flag = 0
+                for j in range(9): ## row dot set
+                    if self.f_list[i][j] == 0:
+                        row_dot.add((i, j))
+
+                if len(row_dot) < 2: ## no possible combination
+                    continue
+                
+                for k in range(2, len(row_dot) + 1): ## possible combinations of dot, size 2 ~ 9, possible_l 0 ~ 7
+                    possible_l.append(set(combinations(row_dot, k)))
+                
+                
+                for m in range(len(possible_l)): ## any size of combination
+                    for e in possible_l[m]: ## one combination of tuple
+                        set_size = len(e)
+                        num_size = 0
+                        num_set = set()
+                        for ee in e: ## every tuple in one combination
+                            x, y = ee
+                            num_set.union(self.corner_l[x][y])
+                        num_size = len(num_set)
+                        if set_size == num_size:
+                            found_row = x
+                            for eee in row_dot: ## all selective dot in this row
+                                if eee not in e: ## if dot not in combination
+                                    x_c, y_c = eee
+                                    for nn in range(1, 10): ## every number
+                                        if nn in num_set: ## number in combination number set
+                                            if nn in self.corner_l[x_c][y_c]: ## number in dot selective number set
+                                                self.corner_l[x_c][y_c].remove(nn)
+                                                self.cancel_l[x_c][y_c].add(nn)
+                                                if len(self.corner_l[x_c][y_c]) == 1:
+                                                    sulo_num = self.corner_l[x_c][y_c].pop()
+                                                    self.f_list = sulo_num
+                                                    found_number_and_singleton(x_c, y_c)
+                                                
+                                            
+                        
+
+            if loop_flag == 0:
+                break
