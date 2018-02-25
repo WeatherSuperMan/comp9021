@@ -1,2 +1,3 @@
 # comp9021
-comp9021 quizes and assignment
+
+Python algorithm quizes and assignments
